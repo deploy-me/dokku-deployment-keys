@@ -35,7 +35,7 @@ create_private_key_folder() {
 
 print_help(){
   cat<<EOF
-  deploymentkeys:create <app>, Create a pair of app-specific deployment keys
+  deploymentkeys:create <app> [bits], Create a pair of app-specific deployment keys
   deploymentkeys:delete <app>, Delete the current pair of deployment keys
   deploymentkeys:shared, Shows the current shared public key
   deploymentkeys:show   <app>, Shows the current public key to add to your VCS
@@ -49,7 +49,7 @@ case "$1" in
     check_exists
     check_app_has_keys
     create_private_key_folder
-    ssh-keygen -q -t rsa -b 2048 -f "$APP_SPECIFIC_KEY_FOLDER/id_rsa" -N ""
+    ssh-keygen -q -t rsa -b "${3:-2048}" -f "$APP_SPECIFIC_KEY_FOLDER/id_rsa" -N ""
     chown -R dokku:dokku "$DOKKU_ROOT/.deployment-keys"
     echo "Keys created, here is the public key for $APP:"
     cat "$APP_SPECIFIC_KEY_FOLDER/id_rsa.pub";
