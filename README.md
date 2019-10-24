@@ -26,10 +26,10 @@ dokku plugin:install https://github.com/cedricziel/dokku-deployment-keys.git dep
 
 ## How does it work?
 
-On installation, this plugin generates a pair of SSH Keys (rsa, 2048b) and will echo the resulting public key.
+On installation, this plugin generates a pair of SSH Keys (rsa, 4096b) and will echo the resulting public key.
 You can add this public key to your VCS Provider-which often allow read-only SSH keys to be added to a project for CI.
 
-The exact command used for the key generation is `ssh-keygen -q -t rsa -b 2048 -f "$shared_key_folder/id_rsa" -N ""`
+The exact command used for the key generation is `ssh-keygen -q -t rsa -b 4096 -f "$shared_key_folder/id_rsa" -N ""`
 
 The generated key at this point is a shared one, which means it is valid for any app on your Dokku host.
 
